@@ -1,6 +1,13 @@
 pipeline{
   agent none
   stages{
+    stage('Setup parameters') {
+            steps {
+                script {
+                  properties([parameters([choice(choices: ['compile ', 'codequality', 'clean ', 'test', 'package'], name: 'stage')])])
+                }  
+            }
+    }
     stage('Compile'){
       agent any
       steps{
